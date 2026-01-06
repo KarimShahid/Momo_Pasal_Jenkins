@@ -67,7 +67,8 @@ pipeline {
                 sshagent(['ec2-ssh']) {
                     sh """
                     ssh -o StrictHostKeyChecking=no ubuntu@${params.SERVER_IP} \\
-                    'docker compose pull &&
+                    'cd ~/momo-app &&
+                     docker compose pull &&
                      docker compose down &&
                      docker compose up -d'
                     """
