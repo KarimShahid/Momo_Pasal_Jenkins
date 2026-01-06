@@ -1,0 +1,23 @@
+services:
+  frontend:
+    build: 
+      context: ./frontend
+      args:
+        VITE_API_URL: http://34.234.236.176:4000/api
+    image: karimshahid/frontend:latest
+    platform: linux/amd64
+    container_name: momo-frontend
+    ports:
+      - 80:80
+    restart: unless-stopped 
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    image: karimshahid/backend:latest
+    platform: linux/amd64
+    container_name: momo-backend
+    ports:
+      - 4000:4000
+    restart: unless-stopped
