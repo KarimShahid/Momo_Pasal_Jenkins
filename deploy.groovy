@@ -24,7 +24,7 @@ pipeline {
 
         stage('Build Backend Image') {
             steps {
-                sh "docker build -t ${BACKEND_IMAGE} ./backend"
+                sh "docker build --platform linux/amd64 -t ${BACKEND_IMAGE} ./backend"
             }
         }
 
@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    docker build \
+                    docker build --platform linux/amd64 \
                       --build-arg VITE_API_URL=http://${params.SERVER_IP}:4000/api \
                       -t ${FRONTEND_IMAGE} \
                       ./frontend
